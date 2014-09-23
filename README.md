@@ -1,6 +1,6 @@
 # tires
 
-**A command line tool for remembering what tires are on the motorcycle.**
+**A command line tool for remembering what tires are on my motorcycle.**
 
 [Changelog](#changelog)
 
@@ -26,7 +26,7 @@ The problem is, sets of tires can be swapped as needed (I own a COATS 220 tire c
 
 I'm retired, so I try to get as many miles on a set of tires as I can.  `tires` helps me manage all  that.
 
-NOTE: This project is a shameless rip-off of the awesome little script by Bret Terpstra named "doing".
+NOTE: This project is a shameless rip-off of the awesome little script by Brett Terpstra named "doing" [link](https://github.com/ttscoff/doing/).
 
 
 ## Installation
@@ -94,7 +94,7 @@ The config file is stored in "~/.tiresrc", and is created on the first run.
 
 The one thing you'll probably want to adjust is the file that the notes are stored in. That's the `tires_file` key:
 
-    dtires_file: /Users/username/Dropbox/nvALT2.2/?? What Tires are Mounted.md
+    tires_file: /Users/username/Dropbox/nvALT2.2/?? What Tires are Mounted.md
 
 ### "Current actions" section
 
@@ -379,39 +379,6 @@ Example: Archive all Currently items for @client that are marked @done
 
 ---
 
-## Extras
-
-### Bash completion
-
-See the file `doing.completion.bash` in the git repository for full bash completion. Thanks to [fcrespo82](https://github.com/fcrespo82) for getting it [started](https://gist.github.com/fcrespo82/9609318).
-
-### Zsh completion
-
-See the file doing.completion.zsh in the git repository for zsh completion.
-
-### Launchbar
-
-The previous incarnation of `doing` had a [LaunchBar](http://obdev.at/launchbar/) action that I used frequently. The Day One popup has mostly replaced that for me, but only because I have a system that connects it to my WWID file. However, I've still found a place for adding WWID entries without including them in my journal, and LaunchBar is the perfect way to do that for me.
-
-All you need is an AppleScript saved at "~/Library/Application Support/LaunchBar/Actions/Doing.scpt". It should look like this:
-
-
-    on handle_string(message)
-        -- get the input from LaunchBar
-        if message is "?" then
-            -- if the input is just "?" display the last three entries
-            set _doing to do shell script "/usr/bin/doing recent 3"
-            tell application "LaunchBar" to display in large type _doing
-        else
-            -- otherwise, create a new entry using the input
-            do shell script "/usr/bin/doing now " & quoted form of message
-        end if
-        
-    end handle_string
-
-
-Evan Lovely has [converted this to an Alfred workflow as well](http://www.evanlovely.com/blog/technology/alfred-for-terpstras-doing/).
-
 ## Troubleshooting
 
 ### Errors after "Successfully installed..."
@@ -421,9 +388,9 @@ If you get errors in the terminal immediately after a message like:
     Successfully installed doing-x.x.x
     2 gems installed
 
-...it may just be documentation related. If running `doing` works, you can ignore them. If not, try running the install command again with `--no-document`:
+...it may just be documentation related. If running `tires` works, you can ignore them. If not, try running the install command again with `--no-document`:
 
-    $ gem install --no-document doing
+    $ gem install --no-document tires
 
 ### Command not found
 
@@ -440,11 +407,9 @@ Ruby is rife with encoding inconsistencies across platforms and versions. Feel f
 
 ### Support
 
-I'm not making any money on `doing`, and I don't plan to spend a lot of time fixing errors on an array of operating systems and platforms I don't even have access to. You'll probably have to solve some things on your own.
+I'm not making any money on `tires`, and I don't plan to spend a lot of time fixing errors on an array of operating systems and platforms I don't even have access to. You'll probably have to solve some things on your own.
 
-That said, you can get support from other users (and occasionally me) on GitHub. If you run into a replicatable bug in your environment, please [post an issue](https://github.com/ttscoff/doing/issues) and include your platform, OS version, and the result of `ruby -v`, along with a copy/paste of the error message. To get a more verbose error message, try running `GLI_DEBUG=true doing [...]` for a full trace.
-
-Please try not to email me directly about GitHub projects.
+That said, you can get support from other users (and occasionally me) on GitHub. If you run into a replicatable bug in your environment, please [post an issue](https://github.com/bherbert/tires/issues) and include your platform, OS version, and the result of `ruby -v`, along with a copy/paste of the error message. To get a more verbose error message, try running `GLI_DEBUG=true doing [...]` for a full trace.
 
 ### Developer notes
 
@@ -452,105 +417,7 @@ I'll try to document some of the code structure as I flesh it out. I'm currently
 
 ### Changelog
 
-#### 1.0.0pre
+#### 0.1.0
 
-* Skipped ahead in the version numbering. Because I don't care.
-* Added a `note` command and `--note` flags for entry creation commands
+- basic stuff
 
-#### 0.2.6pre
-
-* --totals, --[no-]times, --output [csv,html] options for yesterday command.
-* Add tests for Darwin to hide OS X-only features on other systems
-* -f flag to `now` command for finishing last task when starting a new one (Looks back for the last unfinished task in the list)
-* --took option for `done` and `finish` for specifying intervals from the start date for the completion date
-* Basic command line reporting
-* --auto flag for `finish` and `done` that will automatically set the completion time to 1 minute before the next start time in the list. You can use it retroactively to add times to sequential todos.
-* `doing grep` for searching by text or regex
-
-#### 0.2.5
-
-* Default to showing times #26, show totals even if no tags exist #27, fix indentation #29
-* Add section label to archived tasks automatically, excepting Currently section
-* Today outputs and backdate for finish
-* html styling and fix for 1.8.7 haml errors
-* Look, HTML output! (`--output html`)
-* Also, `--output csv`
-* let doing archive function on all sections
-* option to exclude date from `@done`,  
-* output newlines in sections and views
-* Flagging (`doing mark`)
-* fix for view/section guess error
-* Adding tag filtering to archive command (`doing archive \@done`)
-* `doing yesterday`
-* `doing done -r` to remove last doing tag (optionally from `-s Section`)
-* Add -f flag to specify alternate doing file
-* Meanwhile command
-
-#### 0.2.1
-
-- CSV output for show command (`--csv`)
-- HTML output for show command (`--output html`)
-- fuzzy searching for all commands that specify a view. 
-  - On the terminal you'll see "Assume you meant XXX" to show what match it found, but this is output to STDERR and won't show up if you're redirecting the output or using it in GeekTool, etc.
-- tags_color in view config to highlight tags at the end of the lines. Can be set to any of the %colors.
-- Basic time tracking. 
-  - `-t` on `show` and `view` will turn on time calculations
-  - Intervals between timestamps and dated `@done` tags are calculated for each line, if the tag exists. 
-  - You must include a %interval token in the appropriate template for it to show
-  - `@start(date)` tags can optionally be used to override the time stamp in the calculation
-  - Any other tags in the line have that line's total added to them
-  - Totals for tags can be displayed at the end of output with `--totals`
-
-
-#### 0.2.0
-
-- `doing done` without argument tags last entry done
-  - `-a` archives them
-- `doing finish` or `doing finish X` marks last X entries done
-  - `-a` archives them
-- `doing tag tag1 [tag2]` tags last entry or `-c X` entries
-  - `doing tag -r tag1 [tag2]` removes said tag(s)
-- custom views additions
-  - custom views can include `tags` and `tags_bool`
-    - tags is a space separated list of tags to filter the results by
-    - tags_bool defines AND (all tags must exist), OR (any tag exists), or NONE (none of the tags exist)
-  - order key (asc or desc) defines output sort order by date
-  - section key can be set to "All" to combine sections
-- `doing show` updates
-  - accepts "all" as a section
-  - arguments following section name are tags to filter by
-    - `-b` sets boolean (AND, OR, NONE) or (ALL, ANY, NONE) (default OR/ANY)
-  - use `-c X` to limit results
-  - use `-s` to set sort order (asc or desc)
-  - use `-a` to set age (newest or oldest)
-- fuzzy section guessing when specified section isn't found
-- fuzzy view guessing for `doing view` command
-
-----
-
-#### 0.1.9
-
-- colors in templated output
-- open command
-  - opens in the default app for file type
-  - -a APPNAME (`doing open -a TaskPaper`)
-  - -b bundle_id (`doing open -b com.sublimetext.3`)
-- -e switch for `now`, `later` and `done` commands
-  - save a tmp file and open it in an editor
-  - allows multi-line entries, anything after first line is considered a note
-  - assumed when no input is provided (`doing now`)
-- `doing views` shows all available custom views
-- `doing view` without a view name will let you choose a view from a menu
-- `doing archive` fixed so that `-k X` works to keep X number of entries in the section
-
-#### 0.1.7
-
-- colors in templated output
-- open command
-  - opens in the default app for file type
-  - -a APPNAME (`doing open -a TaskPaper`)
-  - -b bundle_id (`doing open -b com.sublimetext.3`)
-- -e switch for `now`, `later` and `done` commands
-  - save a tmp file and open it in an editor
-  - allows multi-line entries, anything after first line is considered a note
-  - assumed when no input is provided (`doing now`)
