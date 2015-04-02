@@ -22,7 +22,7 @@
 
 I ride a mix of on- and off-road on a BMW R1200GS Adventure.  When doing an extended on-road trip, I will mount a set of 90/10 (on/off) tires like Metzler Tourances.  When doing more local off-road riding (between big road trips), I will mount a more 50/50 tire like a Heidenau K60 Scout. 
 
-The problem is, sets of tires can be swapped as needed (I own a COATS 220 tire changer), so whatever set just came off might well have a lot of miles left on the tread. But how much tread?  How many miles are actually ON the tires I just took off? 
+The problem is, sets of tires can be swapped as needed (I own a COATS 220 tire changer), so whatever set just came off might well have a lot of miles left on the tread. But how much tread?  How many miles are actually ON the tires I just took off?  How many miles did I actually get on that tire I just retired?
 
 I'm retired, so I try to get as many miles on a set of tires as I can.  `tires` helps me manage all  that.
 
